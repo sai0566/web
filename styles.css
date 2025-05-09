@@ -3,92 +3,98 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
-  
-  /* Body styling */
-  body {
+}
+
+/* Body styling */
+body {
     height: 100vh;
     background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  /* Container to center the login box */
-  .container {
+}
+
+/* Container to center the login box */
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-  }
-  
-  /* Login box styling */
-  .login-box {
+}
+
+/* Login box styling */
+.login-box {
     background-color: #ffffff;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     width: 320px;
     text-align: center;
-  }
-  
-  /* Heading styling */
-  .login-box h2 {
+}
+
+/* Heading styling */
+.login-box h2 {
     margin-bottom: 24px;
     color: #333333;
-  }
-  
-  /* Label styling */
-  .login-box label {
+}
+
+/* Label styling */
+.login-box label {
     display: block;
     text-align: left;
     margin-bottom: 8px;
     color: #555555;
     font-weight: 500;
-  }
-  
-  /* Input field styling */
-  .login-box input {
+}
+
+/* Input field styling */
+.login-box input {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
     border: 1px solid #cccccc;
     border-radius: 8px;
     background-color: #f9f9f9;
-    font-size: 14px;
-  }
-  
-  /* Button styling */
-  .login-box button {
+    transition: border-color 0.3s ease;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+/* Button styling */
+.login-box button {
     width: 100%;
     padding: 12px;
-    background-color: #4a90e2;
+    background-color: #4CAF50;
     color: #ffffff;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
     cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s ease;
-  }
-  
-  .login-box button:hover {
-    background-color: #357ab8;
-  }
-  
-  /* Sign-up text styling */
-  .signup {
-    margin-top: 20px;
+}
+
+.login-box button:hover {
+    background-color: #45a049;
+}
+
+/* Link styling */
+.login-box p {
+    margin-top: 16px;
     font-size: 14px;
     color: #666666;
-  }
-  
-  .signup a {
-    color: #4a90e2;
+}
+
+.login-box a {
+    color: #0078d7;
     text-decoration: none;
-  }
-  
-  .signup a:hover {
+    transition: color 0.3s ease;
+}
+
+.login-box a:hover {
+    color: #0056b3;
     text-decoration: underline;
-  }
-  
+}
