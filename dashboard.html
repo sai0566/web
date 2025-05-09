@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic Tac Toe with AI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    }
+
+    .container {
+      text-align: center;
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .game {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .cell:hover {
+      background-color: #d0d0d0;
+    }
+
+    .status {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .scoreboard {
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #3367d6;
+    }
+
+    /* Player X Styles */
+    .cell.x {
+      background-color: #66cc66;
+      color: #fff;
+    }
+
+    /* Player O Styles */
+    .cell.o {
+      background-color: #ff6666;
+      color: #fff;
+    }
+
+    .container button {
+      background-color: #34a853;
+    }
+
+    .container button:hover {
+      background-color: #0f9d58;
+    }
+
+    /* Difficulty Dropdown */
+    select {
+      padding: 5px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="scoreboard" id="scoreboard">Player X: 0 | AI (O): 0</div>
+    <div class="status" id="gameStatus">Player X's turn</div>
+    <div class="game" id="gameBoard"></div>
+
+    <select id="difficulty" onchange="changeDifficulty()">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+
+    <button class="btn" onclick="resetGame()">Reset Game</button>
+    <button class="btn" onclick="resetScores()">Reset Scores</button>
+
+    <!-- Audio elements -->
+    <audio id="moveSound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+    <audio id="winSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3" preload="auto"></audio>
+    <audio id="drawSound" src="https://www.soundjay.com/button/beep-09.wav" preload="auto"></audio>
+    <audio id="turnSound" src="https://www.soundjay.com/button/button-3.wav" preload="auto"></audio>
+  </div>
+
+  <script>
+    const gameBoard = document.getElementById('gameBoard');
+    const gameStatus = document.getElementById('gameStatus');
+    const scoreboard = document.getElementById('scoreboard');
+    const moveSound = document.getElementById('moveSound');
+    const winSound = document.getElementById('winSound');
+    const drawSound = document.getElementById('drawSound');
+    const turnSound = document.getElementById('turnSound');
+    const difficultySelect = document.getElementById('difficulty');
+
+    let board = Array(9).fill(null);
+    let currentPlayer = 'X';
+    let scores = { X: 0, O: 0 };
+    let gameOver = false;
+    let difficulty = 'easy'; // Default difficulty
+
+    function changeDifficulty() {
+      difficulty = difficultySelect.value;
+    }
+
+    function checkWinner() {
+      const winPatterns = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+      for (const [a,b,c] of winPatterns) {
+        if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+          return board[a];
+        }
+      }
+      if (!board.includes(null)) return "Draw";
+      return null;
+    }
+
+    function handleClick(index) {
+      if (board[index] || gameOver || currentPlayer !== 'X') return;
+
+      board[index] = 'X';
+      moveSound.play();
+      turnSound.play();
+      render();
+
+      const result = checkWinner();
+      if (result) return endGame(result);
+
+      currentPlayer = 'O';
+      gameStatus.textContent = "AI is thinking...";
+      setTimeout(() => {
+        aiMove();
+        render();
+        const aiResult = checkWinner();
+        if (aiResult) return endGame(aiResult);
+        currentPlayer = 'X';
+        gameStatus.textContent = "Player X's turn";
+      }, 500);
+    }
+
+    function aiMove() {
+      if (difficulty === 'easy') {
+        easyMove();
+      } else if (difficulty === 'medium') {
+        mediumMove();
+      } else if (difficulty === 'hard') {
+        hardMove();
+      }
+    }
+
+    function easyMove() {
+      // Simple AI: choose first available cell
+      for (let i = 0; i < board.length; i++) {
+        if (!board[i]) {
+          board[i] = 'O';
+          moveSound.play();
+          break;
+        }
+      }
+    }
+
+    function mediumMove() {
+      // Medium AI: Block if needed or choose a random spot
+      for (let i = 0; i < board.length; i++) {
+        if (!board[i]) {
+          board[i] = 'O';
+          if (checkWinner() === 'O') {
+            moveSound.play();
+            return;
+          }
+          board[i] = null;  // Undo move if it doesn't block the win
+        }
+      }
+      easyMove(); // If no block was found, fallback to easy move
+    }
+
+    function hardMove() {
+      // Hard AI: Use minimax algorithm for optimal play
+      const bestMove = minimax(board, 'O');
+      board[bestMove.index] = 'O';
+      moveSound.play();
+    }
+
+    function minimax(board, player) {
+      const availableSpots = board.map((value, index) => value === null ? index : null).filter(value => value !== null);
+      if (checkWinner() === 'X') return { score: -10 };
+      if (checkWinner() === 'O') return { score: 10 };
+      if (availableSpots.length === 0) return { score: 0 };
+
+      const moves = [];
+      availableSpots.forEach(spot => {
+        const move = { index: spot };
+        board[spot] = player;
+        const result = minimax(board, player === 'O' ? 'X' : 'O');
+        move.score = result.score;
+        board[spot] = null;
+        moves.push(move);
+      });
+
+      let bestMove;
+      if (player === 'O') {
+        bestMove = moves.reduce((best, move) => move.score > best.score ? move : best);
+      } else {
+        bestMove = moves.reduce((best, move) => move.score < best.score ? move : best);
+      }
+      return bestMove;
+    }
+
+    function endGame(winner) {
+      gameOver = true;
+      if (winner === 'Draw') {
+        gameStatus.textContent = "It's a draw!";
+        drawSound.play();
+      } else {
+        gameStatus.textContent = `Player ${winner} wins!`;
+        scores[winner]++;
+        winSound.play();
+      }
+      updateScoreboard();
+    }
+
+    function render() {
+      gameBoard.innerHTML = '';
+      board.forEach((value, i) => {
+        const cell = document.createElement('div');
+        cell.className = 'cell ' + (value ? value.toLowerCase() : '');
+        cell.textContent = value || '';
+        cell.onclick = () => handleClick(i);
+        gameBoard.appendChild(cell);
+      });
+    }
+
+    function resetGame() {
+      board = Array(9).fill(null);
+      currentPlayer = 'X';
+      gameOver = false;
+      gameStatus.textContent = "Player X's turn";
+      render();
+    }
+
+    function resetScores() {
+      scores = { X: 0, O: 0 };
+      resetGame();
+      updateScoreboard();
+    }
+
+    function updateScoreboard() {
+      scoreboard.textContent = `Player X: ${scores.X} | AI (O): ${scores.O}`;
+    }
+
+    render();
+  </script>
+
+</body>
+</html>
