@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
@@ -13,38 +14,39 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
+
     .message-box h1 {
       color: #333333;
       margin-bottom: 20px;
     }
+
     .message-box p {
       color: #555555;
       font-size: 16px;
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <div class="message-box">
       <h1>Login Successful!</h1>
       <p>welcome to page 🤪</p><br>
-      <img src="https://media.giphy.com/media/FXXqn7xJxzIdi/giphy-downsized-large.gif" width="300px"; alt="loading"><br>
-  <button onclick="logout()">Logout</button>
-  <br><br>
-  <button onclick="continueToDashboard()">Continue</button>
+      <img src="https://media.giphy.com/media/FXXqn7xJxzIdi/giphy-downsized-large.gif" width="300px" ; alt="loading"><br>
+      <button onclick="logout()">Logout</button>
+      <br><br>
+      <button onclick="continueToDashboard()">Continue</button>
     </div>
   </div>
   <script>
-  function logout() {
-    // You can clear session info here if needed
-    alert('You have been logged out.');
-    window.location.href = 'index.html'; // Redirect to login
-  }
-</script>
-<script>
-  function continueToDashboard() {
-    window.location.href = 'dashboard.html';
-  }
-</script>
+    function logout() {
+      localStorage.removeItem('loggedInUser'); // Clear logged-in user
+      window.location.href = 'index.html';
+    }
+    function continueToDashboard() {
+      window.location.href = 'dashboard.html';
+    }
+  </script>
 </body>
+
 </html>
