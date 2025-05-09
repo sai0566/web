@@ -27,9 +27,11 @@
   <div class="container">
     <div class="message-box">
       <h1>Login Successful!</h1>
-      <p>welcome have a smile🤪</p><br>
+      <p>welcome to page 🤪</p><br>
       <img src="https://media.giphy.com/media/FXXqn7xJxzIdi/giphy-downsized-large.gif" width="300px"; alt="loading"><br>
   <button onclick="logout()">Logout</button>
+  <br><br>
+  <button onclick="continueToDashboard()">Continue</button>
     </div>
   </div>
   <script>
@@ -37,6 +39,11 @@
     // You can clear session info here if needed
     alert('You have been logged out.');
     window.location.href = 'index.html'; // Redirect to login
+  }
+</script>
+<script>
+  function continueToDashboard() {
+    window.location.href = 'dashboard.html';
   }
 </script>
 </body>
