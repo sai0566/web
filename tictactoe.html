@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="C:\Users\SAIRAM\Desktop\web\styles.css" />
+  <style>
+  body {
+         margin: 0;
+         font-family: 'Arial', sans-serif;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         background: linear-gradient(135deg, #ff7e5f, #feb47b);
+     }
+
+     .container {
+         text-align: center;
+         background-color: #ffffff;
+         border-radius: 15px;
+         padding: 20px;
+         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+         width: 100%;
+         max-width: 500px;
+     }
+
+     .btn {
+         padding: 10px 20px;
+         margin: 10px;
+         font-size: 16px;
+         background-color: #4285f4;
+         color: white;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         transition: background-color 0.3s;
+     }
+
+     .btn:hover {
+         background-color: #3367d6;
+     }
+
+     .game {
+         display: grid;
+         grid-template-columns: repeat(3, 100px);
+         grid-gap: 10px;
+         justify-content: center;
+         margin: 20px 0;
+     }
+
+     .cell {
+         width: 100px;
+         height: 100px;
+         background-color: #e0e0e0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-size: 2rem;
+         cursor: pointer;
+         user-select: none;
+         border-radius: 10px;
+     }
+
+     .cell.x {
+         background-color: #66cc66;
+         color: #fff;
+     }
+
+     .cell.o {
+         background-color: #ff6666;
+         color: #fff;
+     }
+
+     .scoreboard {
+         margin: 10px 0;
+         font-size: 18px;
+         font-weight: bold;
+         color: #333;
+     }
+
+     .grid-container {
+         display: grid;
+         grid-template-columns: repeat(4, 80px);
+         grid-gap: 10px;
+         justify-content: center;
+         margin: 20px auto;
+     }
+
+     .tile {
+         width: 80px;
+         height: 80px;
+         background-color: #ccc0b3;
+         font-size: 24px;
+         font-weight: bold;
+         color: #776e65;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border-radius: 8px;
+     }
+
+     #difficulty-select {
+         margin-bottom: 10px;
+     }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Tic Tac Toe</h2>
+    <div id="gameBoard"></div>
+    <p id="gameStatus"></p>
+    <div id="scoreboard"></div>
+    <p><strong>AI Difficulty:</strong> <span id="currentDifficulty">Easy</span></p>
+
+    <div class="game-controls">
+      <select id="difficulty" onchange="changeDifficulty()">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <br /><br />
+      <button onclick="resetGame()">Restart Game</button>
+      <button onclick="resetScores()">Reset Scores</button>
+      <button onclick="location.href='dashboard.html'">Back to Dashboard</button>
+    </div>
+  </div>
+
+  <audio id="clickSound" src="sounds/click.mp3"></audio>
+  <audio id="winSound" src="sounds/win.mp3"></audio>
+  <audio id="drawSound" src="sounds/draw.mp3"></audio>
+  <audio id="resetSound" src="sounds/reset.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
