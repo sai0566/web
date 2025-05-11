@@ -96,13 +96,6 @@ body {
 }
 
 /* Tic Tac Toe Styles */
-#gameBoard {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 10px;
-  margin: 20px auto;
-}
 
 .cell {
   display: flex;
