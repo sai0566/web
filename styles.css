@@ -1,100 +1,209 @@
 /* Reset default styles */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* Body styling */
 body {
-    height: 100vh;
-    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Container to center the login box */
+/* Container to center content */
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
 }
 
 /* Login box styling */
 .login-box {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    width: 320px;
-    text-align: center;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  text-align: center;
 }
 
-/* Heading styling */
 .login-box h2 {
-    margin-bottom: 24px;
-    color: #333333;
+  margin-bottom: 24px;
+  color: #333333;
 }
 
-/* Label styling */
 .login-box label {
-    display: block;
-    text-align: left;
-    margin-bottom: 8px;
-    color: #555555;
-    font-weight: 500;
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  color: #555555;
+  font-weight: 500;
 }
 
-/* Input field styling */
 .login-box input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #cccccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
 }
 
 .login-box input:focus {
-    outline: none;
-    border-color: #4CAF50;
+  outline: none;
+  border-color: #007bff; /* Changed focus color */
 }
 
-/* Button styling */
 .login-box button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff; /* Changed button color */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .login-box button:hover {
-    background-color: #45a049;
+  background-color: #0056b3; /* Changed button hover color */
 }
 
-/* Link styling */
 .login-box p {
-    margin-top: 16px;
-    font-size: 14px;
-    color: #666666;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #666666;
 }
 
 .login-box a {
-    color: #0078d7;
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: #007bff; /* Changed link color */
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .login-box a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+  color: #0056b3; /* Changed link hover color */
+  text-decoration: underline;
+}
+
+/* Tic Tac Toe Styles */
+#gameBoard {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+  margin: 20px auto;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e9ecef; /* Light grey for cells */
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cell:hover {
+  background-color: #ced4da; /* Slightly darker on hover */
+}
+
+.cell.x {
+  color: #28a745; /* Green for X */
+  animation: popIn 0.2s ease;
+}
+
+.cell.o {
+  color: #dc3545; /* Red for O */
+  animation: popIn 0.2s ease;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+#gameStatus {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  color: #343a40; /* Dark grey for status */
+}
+
+#scoreboard {
+  font-size: 1em;
+  margin-bottom: 10px;
+  color: #495057; /* Grey for scoreboard */
+}
+
+.game-controls {
+  margin-top: 20px;
+}
+
+.game-controls label {
+  margin-right: 10px;
+  color: #555;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #007bff; /* Blue for buttons */
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+#difficulty {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  color: #333;
+}
+.logout-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+}
+
+.logout-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
 }
