@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Passwords do not match.');
         return;
       }
-
       const users = JSON.parse(localStorage.getItem('users')) || {};
 
       if (users[username]) {
@@ -262,8 +261,10 @@ let loggedInUser = localStorage.getItem('loggedInUser') || 'Player X';
 // --- Difficulty Change Handler ---
 function changeDifficulty() {
     difficulty = difficultySelect.value;
+    console.log("Difficulty set to:", difficulty); // Added logging
     resetGame(); // Reset the game when difficulty changes
 }
+
 
 // --- Check for Winner ---
 function checkWinner() {
@@ -298,14 +299,25 @@ function handleClick(i) {
 
 // --- AI Makes a Move (Difficulty-Based) ---
 function aiMove() {
+    console.log("AI Difficulty:", difficulty); // Log the current difficulty
     let bestMoveIndex;
 
     if (difficulty === 'easy') {
         bestMoveIndex = findRandomMove();
+        console.log("AI (Easy) chose:", bestMoveIndex);
     } else if (difficulty === 'medium') {
-        bestMoveIndex = findBlockingOrWinningMove() || findRandomMove();
+        bestMoveIndex = findBlockingOrWinningMove();
+        if (bestMoveIndex !== undefined) {
+            console.log("AI (Medium) chose blocking/winning move:", bestMoveIndex);
+        } else {
+            bestMoveIndex = findRandomMove();
+            console.log("AI (Medium) chose random move:", bestMoveIndex);
+        }
     } else if (difficulty === 'hard') {
-        bestMoveIndex = minimax(board, 'O').index;
+        const minimaxResult = minimax(board, 'O');
+        bestMoveIndex = minimaxResult.index;
+        console.log("Minimax Result:", minimaxResult); // Log the entire minimax result
+        console.log("AI (Hard) chose:", bestMoveIndex);
     }
 
     if (bestMoveIndex !== undefined) {
@@ -319,7 +331,6 @@ function aiMove() {
         gameStatus.textContent = `${loggedInUser}'s turn`;
     }
 }
-
 // --- AI Helper Functions ---
 
 function findRandomMove() {
