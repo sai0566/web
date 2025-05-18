@@ -1,0 +1,23 @@
+{
+  "name": "Mind Games",
+  "short_name": "MindGames",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff6600",
+  "orientation": "portrait",
+  "scope": "./",
+  "description": "Play brain-boosting games like 2048 and Tic-Tac-Toe offline!",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
